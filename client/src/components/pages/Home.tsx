@@ -32,7 +32,7 @@ export default function Home() {
         {selectedLocation ? (
           <LocationDetails
             name={selectedLocation.name}
-            flavor={selectedLocation.flavor}
+            flavors={selectedLocation.flavors}
             address={selectedLocation.address}
             distance={selectedLocation.distance}
           />
@@ -44,7 +44,7 @@ export default function Home() {
               <LocationCard
                 key={location.id}
                 name={location.name}
-                flavor={location.flavor}
+                flavors={location.flavors}
                 address={location.address}
                 distance={location.distance}
                 isSelected={selectedLocation?.id === location.id}

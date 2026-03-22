@@ -1,10 +1,11 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { MapPin, Navigation, Phone, Clock } from 'lucide-react';
+import { MonsterFlavor } from '@/types/location';
 
 interface LocationDetailsProps {
   name: string;
-  flavor: string;
+  flavors: MonsterFlavor[];
   address: string;
   distance?: number;
   isOpen?: boolean;
@@ -12,7 +13,7 @@ interface LocationDetailsProps {
 
 export function LocationDetails({
   name,
-  flavor,
+  flavors,
   address,
   distance,
   isOpen = true,
@@ -21,7 +22,13 @@ export function LocationDetails({
     <Card className="p-6 space-y-4 border-green-400/50 bg-card/80 backdrop-blur-sm">
       <div>
         <h2 className="text-2xl font-bold neon-text mb-1">{name}</h2>
-        <p className="text-cyan-400 text-lg">{flavor}</p>
+        <div className="flex flex-wrap gap-1 mt-1">
+          {flavors.map((f) => (
+            <span key={f} className="text-cyan-400 text-sm bg-cyan-400/10 px-2 py-0.5 rounded">
+              {f}
+            </span>
+          ))}
+        </div>
       </div>
 
       <div className="space-y-3 border-t border-green-400/20 pt-4">

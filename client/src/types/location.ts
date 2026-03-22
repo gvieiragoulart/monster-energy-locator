@@ -1,12 +1,5 @@
-export interface EnergyDrinkLocation {
-  id: string;
-  name: string;
-  flavor: string;
-  latitude: number;
-  longitude: number;
-  address: string;
-  distance?: number;
-}
+export { MonsterFlavor, EnergyDrinkLocation } from '@shared/types';
+import type { EnergyDrinkLocation } from '@shared/types';
 
 export interface UseLocationsResult {
   locations: EnergyDrinkLocation[];

@@ -107,7 +107,7 @@ export function MapComponent({
       const popupContent = `
         <div class="space-y-2 text-xs">
           <div class="font-bold text-green-400">${location.name}</div>
-          <div class="text-cyan-400">${location.flavor}</div>
+          <div class="text-cyan-400">${location.flavors.join(', ')}</div>
           <div class="text-gray-300">${location.address}</div>
           ${location.distance ? `<div class="text-purple-400">${location.distance.toFixed(1)} km</div>` : ''}
         </div>

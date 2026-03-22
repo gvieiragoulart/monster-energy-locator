@@ -1,10 +1,11 @@
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, Zap, Navigation } from 'lucide-react';
+import { MapPin, Navigation } from 'lucide-react';
+import { MonsterFlavor } from '@/types/location';
 
 interface LocationCardProps {
   name: string;
-  flavor: string;
+  flavors: MonsterFlavor[];
   address: string;
   distance?: number;
   isSelected?: boolean;
@@ -13,7 +14,7 @@ interface LocationCardProps {
 
 export function LocationCard({
   name,
-  flavor,
+  flavors,
   address,
   distance,
   isSelected = false,
@@ -32,7 +33,7 @@ export function LocationCard({
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1">
             <h3 className="font-bold text-green-400 text-lg neon-text">{name}</h3>
-            <p className="text-sm text-cyan-400 mt-1">{flavor}</p>
+            <p className="text-sm text-cyan-400 mt-1">{flavors.join(', ')}</p>
           </div>
         </div>
 

@@ -1,17 +1,19 @@
 import { Button } from '@/components/ui/button';
 import { Zap } from 'lucide-react';
+import { MonsterFlavor } from '@/types/location';
 
 interface FlavorFilterProps {
-  selectedFlavor?: string;
-  onFlavorSelect?: (flavor: string | undefined) => void;
+  selectedFlavor?: MonsterFlavor;
+  onFlavorSelect?: (flavor: MonsterFlavor | undefined) => void;
 }
 
 const FLAVORS = [
-  { id: 'original', label: 'Original', color: 'text-green-400 border-green-400' },
-  { id: 'ultra', label: 'Ultra', color: 'text-cyan-400 border-cyan-400' },
-  { id: 'zero', label: 'Zero', color: 'text-purple-400 border-purple-400' },
-  { id: 'mango', label: 'Mango Loco', color: 'text-yellow-400 border-yellow-400' },
-  { id: 'nitro', label: 'Nitro', color: 'text-orange-400 border-orange-400' },
+  { value: MonsterFlavor.Original, label: 'Original', color: 'text-green-400 border-green-400' },
+  { value: MonsterFlavor.Ultra, label: 'Ultra', color: 'text-cyan-400 border-cyan-400' },
+  { value: MonsterFlavor.Zero, label: 'Zero', color: 'text-purple-400 border-purple-400' },
+  { value: MonsterFlavor.MangoLoco, label: 'Mango Loco', color: 'text-yellow-400 border-yellow-400' },
+  { value: MonsterFlavor.Nitro, label: 'Nitro', color: 'text-orange-400 border-orange-400' },
+  { value: MonsterFlavor.UltraSunrise, label: 'Ultra Sunrise', color: 'text-amber-400 border-amber-400' },
 ];
 
 export function FlavorFilter({ selectedFlavor, onFlavorSelect }: FlavorFilterProps) {
@@ -32,11 +34,11 @@ export function FlavorFilter({ selectedFlavor, onFlavorSelect }: FlavorFilterPro
         
         {FLAVORS.map((flavor) => (
           <Button
-            key={flavor.id}
-            onClick={() => onFlavorSelect?.(flavor.label)}
-            variant={selectedFlavor === flavor.label ? 'default' : 'outline'}
+            key={flavor.value}
+            onClick={() => onFlavorSelect?.(flavor.value)}
+            variant={selectedFlavor === flavor.value ? 'default' : 'outline'}
             className={`text-xs h-8 ${
-              selectedFlavor === flavor.label
+              selectedFlavor === flavor.value
                 ? `bg-transparent border-2 ${flavor.color}`
                 : 'border-gray-600 text-gray-400 hover:border-gray-500'
             }`}
