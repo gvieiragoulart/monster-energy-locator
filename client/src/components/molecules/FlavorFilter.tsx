@@ -16,12 +16,7 @@ const FLAVORS = [
 
 export function FlavorFilter({ selectedFlavor, onFlavorSelect }: FlavorFilterProps) {
   return (
-    <div className="space-y-3">
-      <div className="flex items-center gap-2">
-        <Zap className="w-4 h-4 text-green-400" />
-        <h3 className="text-sm font-semibold text-gray-300">Filtrar por Sabor</h3>
-      </div>
-      
+    <div className="space-y-3">      
       <div className="flex flex-wrap gap-2">
         <Button
           onClick={() => onFlavorSelect?.(undefined)}

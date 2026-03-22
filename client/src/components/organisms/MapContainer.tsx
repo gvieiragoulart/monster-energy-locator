@@ -1,22 +1,13 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-
-interface EnergyDrinkLocation {
-  id: string;
-  name: string;
-  flavor: string;
-  latitude: number;
-  longitude: number;
-  address: string;
-  distance?: number;
-}
+import { useUserLocation } from '@/contexts/UserLocationContext';
+import { EnergyDrinkLocation } from '@/types/location';
 
 interface MapContainerProps {
   locations: EnergyDrinkLocation[];
   selectedLocation?: EnergyDrinkLocation;
   onLocationSelect?: (location: EnergyDrinkLocation) => void;
-  userLocation?: { lat: number; lng: number };
 }
 
 // Custom icon for Monster Energy locations
@@ -48,8 +39,8 @@ export function MapComponent({
   locations,
   selectedLocation,
   onLocationSelect,
-  userLocation,
 }: MapContainerProps) {
+  const { userLocation } = useUserLocation();
   const mapRef = useRef<L.Map | null>(null);
   const markersRef = useRef<Map<string, L.Marker>>(new Map());
   const containerRef = useRef<HTMLDivElement>(null);
@@ -83,6 +74,11 @@ export function MapComponent({
     userMarker.bindPopup(
       '<div class="text-sm font-bold text-cyan-400">Sua Localização</div>'
     );
+
+    mapRef.current.setView([userLocation.lat, userLocation.lng], 14, {
+      animate: true,
+      duration: 0.8,
+    });
 
     return () => {
       userMarker.remove();

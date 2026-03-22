@@ -1,20 +1,16 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Search, MapPin, Zap } from 'lucide-react';
+import { Search, MapPin } from 'lucide-react';
 import { useState } from 'react';
+import { useUserLocation } from '@/contexts/UserLocationContext';
 
 interface SearchBarProps {
   onSearch?: (query: string) => void;
-  onLocationClick?: () => void;
-  isLoadingLocation?: boolean;
 }
 
-export function SearchBar({
-  onSearch,
-  onLocationClick,
-  isLoadingLocation = false,
-}: SearchBarProps) {
+export function SearchBar({ onSearch }: SearchBarProps) {
   const [query, setQuery] = useState('');
+  const { isLoadingLocation, handleGetUserLocation } = useUserLocation();
 
   const handleSearch = (value: string) => {
     setQuery(value);
@@ -34,30 +30,13 @@ export function SearchBar({
       </div>
 
       <Button
-        onClick={onLocationClick}
+        onClick={handleGetUserLocation}
         disabled={isLoadingLocation}
         className="w-full bg-purple-600 hover:bg-purple-700 text-white border border-purple-400 glow-on-hover"
       >
         <MapPin className="w-4 h-4 mr-2" />
         {isLoadingLocation ? 'Localizando...' : 'Usar Minha Localização'}
       </Button>
-
-      <div className="grid grid-cols-2 gap-2">
-        <Button
-          variant="outline"
-          className="border-green-400 text-green-400 hover:bg-green-400/10 hover:border-cyan-400"
-        >
-          <Zap className="w-4 h-4 mr-2" />
-          Original
-        </Button>
-        <Button
-          variant="outline"
-          className="border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 hover:border-green-400"
-        >
-          <Zap className="w-4 h-4 mr-2" />
-          Ultra
-        </Button>
-      </div>
     </div>
   );
 }
